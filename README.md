@@ -1,2 +1,3 @@
 # cs257work
-Work for Carleton College CS257: Software Design
+Projects and code for Software Design
+Created 2024 March 29

@@ -5,3 +5,5 @@ toast
 banana
 mac and cheese
 grated parmesan cheese
+any pasta
+pasta plus cheese

@@ -5,7 +5,7 @@ CREATE TABLE earthquakes (
   longitude FLOAT,
   quakedepth FLOAT,
   magnitude FLOAT,
-  magnitude_type VARCHAR(3),
+  magnitude_type VARCHAR(5),
   nst INTEGER,
   gap INTEGER,
   dmin FLOAT,

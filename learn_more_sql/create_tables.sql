@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS us_cities_population;
+DROP TABLE IF EXISTS us_cities;
 CREATE TABLE us_cities (
     city_name TEXT,
     state_name TEXT,
@@ -6,8 +6,8 @@ CREATE TABLE us_cities (
     latitude FLOAT,
     longitude FLOAT
 );
-DROP TABLE IF EXISTS us_states_population;
-CREATE TABLE us_states_population (
+DROP TABLE IF EXISTS us_states;
+CREATE TABLE us_states (
     code VARCHAR(2),
     state_name TEXT,
     state_population INTEGER

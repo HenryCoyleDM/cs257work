@@ -9,6 +9,6 @@ CREATE TABLE us_cities (
 DROP TABLE IF EXISTS us_states;
 CREATE TABLE us_states (
     code VARCHAR(2),
-    state_name TEXT,
+    name TEXT,
     state_population INTEGER
 );

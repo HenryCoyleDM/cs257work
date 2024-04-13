@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS us_cities;
+DROP TABLE IF EXISTS us_cities CASCADE;
 CREATE TABLE us_cities (
     city_name TEXT,
     state_name TEXT,
@@ -6,7 +6,7 @@ CREATE TABLE us_cities (
     latitude FLOAT,
     longitude FLOAT
 );
-DROP TABLE IF EXISTS us_states;
+DROP TABLE IF EXISTS us_states CASCADE;
 CREATE TABLE us_states (
     code VARCHAR(2),
     state_name2 TEXT,

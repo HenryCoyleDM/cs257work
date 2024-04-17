@@ -15,4 +15,5 @@ row = cursor.fetchone()
 if row is None:
     print("Northfield is not present in the database")
 else:
-    print(row)
+    split = row.split()
+    print("Northfield is at Latitude: %s, Longitude: %s", split[3], split[4])

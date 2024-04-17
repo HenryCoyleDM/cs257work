@@ -10,9 +10,9 @@ def test_connection():
     conn = psycopg2.connect(
         host="localhost",
         port=5432,   
-        database="mlepinski",
-        user="mlepinski",
-        password="MyDatabasePassword")
+        database="coyleh2",
+        user="coyleh2",
+        password="books257beach")
 
     if conn is not None:
         print( "Connection Worked!" )

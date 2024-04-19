@@ -35,7 +35,7 @@ cursor.execute("SELECT * FROM us_cities ORDER BY longitude DESC")
 row = cursor.fetchone()
 easternmost = "%s, %s" % (row[0], row[1])
 print("The furthest cities in the cardinal directions are: North: %s; East: %s; South: %s; West: %s" % (northernmost, easternmost, southernmost, westernmost))
-state_input = input("Enter a state name or abbreviation: ")
+state_input = input("Enter a state name or abbreviation: ").capitalize
 # adapted from https://learnsql.com/cookbook/how-to-sum-values-of-a-column-in-sql/
 cursor.execute("SELECT SUM(city_population) AS total_population FROM us_cities WHERE state_name LIKE %s", [state_input])
 row = cursor.fetchone()
@@ -48,7 +48,7 @@ else:
     if row is None:
         print("Please enter a valid state name or code")
     else:
-        state_name = row[0]
+        state_name = row[0].upper
         cursor.execute("SELECT SUM(city_population) AS total_population FROM us_cities WHERE state_name LIKE %s", [state_name])
         row = cursor.fetchone()
         if row is not None and row[0] is not None:

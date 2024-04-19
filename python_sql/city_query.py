@@ -19,3 +19,6 @@ else:
 cursor.execute("SELECT * FROM us_cities ORDER BY city_population DESC")
 row = cursor.fetchone()
 print("%s has the largest population: %d" % (row[0], row[2]))
+cursor.execute("SELECT * FROM us_cities WHERE state_name LIKE 'Minnesota' ORDER BY city_population ASC")
+row = cursor.fetchone()
+print("%s is the Minnesota city with the least population: %d" % (row[0], row[2]))

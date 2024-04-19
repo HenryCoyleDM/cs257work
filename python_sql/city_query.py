@@ -16,3 +16,6 @@ if row is None:
     print("Northfield is not present in the database")
 else:
     print("Northfield is at Latitude: %f, Longitude: %f" % (row[3], row[4]))
+cursor.execute("SELECT * FROM us_cities ORDER BY city_population DESC")
+row = cursor.fetchone()
+print("%s has the largest population: %d" % (row[0], row[2]))

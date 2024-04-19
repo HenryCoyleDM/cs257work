@@ -35,4 +35,21 @@ cursor.execute("SELECT * FROM us_cities ORDER BY longitude DESC")
 row = cursor.fetchone()
 easternmost = "%s, %s" % (row[0], row[1])
 print("The furthest cities in the cardinal directions are: North: %s; East: %s; South: %s; West: %s" % (northernmost, easternmost, southernmost, westernmost))
-
+state_input = input("Enter a state name or abbreviation: ")
+# adapted from https://learnsql.com/cookbook/how-to-sum-values-of-a-column-in-sql/
+cursor.execute("SELECT SUM(city_population) AS total_population FROM us_cities WHERE state_name LIKE %s", [state_input])
+row = cursor.fetchone()
+total_population = row[0]
+if total_population > 0:
+    print("The total population of cities in %s is %d" % (state_input, total_population))
+else:
+    cursor.execute("SELECT state_name2 FROM us_states WHERE code = %s", [state_input])
+    row = cursor.fetchone()
+    state_name = row[0]
+    cursor.execute("SELECT SUM(city_population) AS total_population FROM us_cities WHERE state_name LIKE %s", [state_name])
+    row = cursor.fetchone()
+    total_population = row[0]
+    if total_population > 0:
+        print("The total population of cities in %s (%s) is %d" % (state_name, state_input, total_population))
+    else:
+        print("Please enter a valid state name or code")

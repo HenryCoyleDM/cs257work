@@ -27,7 +27,7 @@ def get_state_population(abbreviation):
         print("Connection failed")
         return '<p style="color:Red">Failed to connect to database</p>'
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM us_states WHERE code LIKE %s" % abbreviation)
+    cursor.execute("SELECT * FROM us_states WHERE code LIKE '%s'" % abbreviation)
     row = cursor.fetchone()
     if row is None:
         return '<p style="color:Red">Please enter a valid state abbreviation</p>'

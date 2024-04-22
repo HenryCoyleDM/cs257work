@@ -32,7 +32,7 @@ def get_state_population(abbreviation):
     if row is None:
         return '<p style="color:Red">Please enter a valid state abbreviation</p>'
     else:
-        return row[0]
+        return "The population of %s is %d" % (row[1], row[2])
 
 if __name__ == '__main__':
     my_port = 5113

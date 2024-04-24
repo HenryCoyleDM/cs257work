@@ -6,7 +6,7 @@ import random
 
 app = Flask(__name__)
 
-@app.route('/random<arguments>')
+@app.route('/random/<arguments>')
 def rand(arguments):
     return arguments
     return render_template("random.html", randNum=num, low=low, high=high)

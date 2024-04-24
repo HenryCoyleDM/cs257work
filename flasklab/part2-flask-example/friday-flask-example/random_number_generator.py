@@ -19,9 +19,9 @@ def random(low, high):
 def single_argument(arguments):
     return arguments
 
-@app.route('/random/r<values>')
+@app.route('/random/r?<values>')
 def form_values(values):
-    return values
+    return "these are values: %s" % (values)
 
 if __name__ == '__main__':
     my_port = 5113

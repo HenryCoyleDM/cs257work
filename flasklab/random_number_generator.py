@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # adapted from https://pythonbasics.org/flask-tutorial-routes/
 @app.route('/random', methods=["POST", "GET"])
-def generate_random_number(low=None, high=None):
+def generate_random_number():
     # if argument_low is not None and argument_high is not None:
         # return "low: %s, high: %s" % (argument_low, argument_high)
     # else:
@@ -19,9 +19,12 @@ def generate_random_number(low=None, high=None):
         high = request.form["high"]
         return "low: %s, high: %s" % (low, high)
     else:
-        if low is not None and high is not None:
-            return "recieved arguments: low: %s, high: %s" % (low, high)
         return render_template("index.html")
+    
+# adapted from https://pythongeeks.org/python-flask-app-routing/
+@app.route('/random/<int:low>/<int:high>')
+def generate_random_number_from_button(low, high):
+    return f"Clicked a button: low: {low}, high: {high}"
 
 if __name__ == '__main__':
     my_port = 5113

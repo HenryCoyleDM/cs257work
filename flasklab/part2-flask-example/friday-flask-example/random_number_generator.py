@@ -19,7 +19,7 @@ def random(low, high):
 def single_argument(arguments):
     return arguments
 
-@app.route('/random/r?<values>')
+@app.route('/random?<values>')
 def form_values(values):
     return "these are values: %s" % (values)
 

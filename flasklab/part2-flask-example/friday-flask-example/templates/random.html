@@ -7,12 +7,16 @@
  
 <body>
     <h2>Fun with Random Numbers</h2>
-    <p>I have asked for a random number is it is:<p>
+    <p>The random number is:<p>
 
-    <p style="color:red">!!! {{randNum}} !!!</p>
+    <p style="color:red"> {{randNum}} </p>
 
     <a href="/">
       <button>Get a New Random Number</button>
+    </a>
+
+    <a href=/rand/{{low}}/{{high}}>
+      <button>Reroll this random number</button>
     </a>
 </body>
  

@@ -16,8 +16,8 @@ def random(low, high):
     return render_template("random.html", randNum=num, low=low, high=high)
 
 @app.route('/random/<arguments>')
-def single_argument(argument):
-    return argument
+def single_argument(arguments):
+    return arguments
 
 if __name__ == '__main__':
     my_port = 5113

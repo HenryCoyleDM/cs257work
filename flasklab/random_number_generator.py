@@ -1,14 +1,21 @@
 from flask import Flask
 from flask import render_template
+from flask import request
 import random
 
 # sample code from Matthew Lepinski
 
 app = Flask(__name__)
 
-@app.route('/random')
+# adapted from https://pythonbasics.org/flask-tutorial-routes/
+@app.route('/random', methods=["POST", "GET"])
 def index():
-    return render_template("index.html")
+    if request.method == "POST":
+        low = request.form["low"]
+        high = request.form["high"]
+        return "low: %s, high: %s" % (low, high)
+    else:
+        return render_template("index.html")
 
 @app.route('/random/<low>/<high>')
 def random(low, high):

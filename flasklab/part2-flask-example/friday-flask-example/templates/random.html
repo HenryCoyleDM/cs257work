@@ -6,17 +6,28 @@
 </head>
  
 <body>
-    <h2>Fun with Random Numbers</h2>
-    <p>The random number is:<p>
+    <h2>What Type of Random Number Would You Like?</h2>
 
-    <p style="color:red"> {{randNum}} </p>
-
-    <a href="/">
-      <button>Get a New Random Number</button>
+    <a href="/random?low=1&high=10">
+      <button>A Small Random Number</button>
     </a>
-
-    <a href=/rand/{{low}}/{{high}}>
-      <button>Reroll this random number</button>
+    <br><br>
+    <a href="/random?low=1000&high=2000">
+      <button>A Big Random Number</button>
+    </a>
+    <br><br>
+    <form action="/">
+      <label for="low">Minimum:</label>
+      <input type="text" id="low" name="low"><br><br>
+      <label for="high">Maximum:</label>
+      <input type="text" id="high" name="high"><br><br>
+      <input type="submit" value="Go">
+    </form>
+    <p>
+      Your random number is: {{result}}
+    </p>
+    <a href="/random?low={{low}}&high={{high}}">
+      <button>Reroll</button>
     </a>
 </body>
  

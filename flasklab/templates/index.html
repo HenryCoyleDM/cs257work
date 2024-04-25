@@ -15,9 +15,10 @@
     <a href={{url_for("generate_random_number_from_button", low=1000, high=2000)}}>
       <button>A Big Random Number</button>
     </a>
-    <form action="/random" method="post">
-      <button name="low" value="1..6">Roll a die</button>
-    </form>
+    <br><br>
+    <a href={{url_for("generate_random_number_from_button", low=1, high=6)}}>
+      <button>Roll a dice</button>
+    </a>
     <br><br>
     <form action="/random" method="post">
       <label for="low">Minimum:</label>

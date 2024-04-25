@@ -17,9 +17,13 @@ def generate_random_number():
     if request.method == "POST":
         low = request.form["low"]
         high = request.form["high"]
-        return "low: %s, high: %s" % (low, high)
+        try:
+            random = random(int(low), int(high))
+            return render_template("index.html", additional_body=f"Random number is: {random}")
+        except ValueError:
+            return render_template("index.html", additional_body="Please enter 2 integers")
     else:
-        return render_template("index.html")
+        return render_template("index.html", additional_body="")
     
 # adapted from https://pythongeeks.org/python-flask-app-routing/
 @app.route('/random/<int:low>/<int:high>')

@@ -19,7 +19,7 @@ def generate_random_number():
         high = request.form["high"]
         try:
             random_int = random.randint(int(low), int(high))
-            return render_template("index.html", additional_body=f"Random number is: {random_int}")
+            return render_template("random.html", random_value=random_int, reroll_low=low, reroll_high=high)
         except ValueError:
             return render_template("index.html", additional_body="Please enter 2 integers")
     else:

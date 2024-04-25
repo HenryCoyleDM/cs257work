@@ -8,25 +8,28 @@
 <body>
     <h2>What Type of Random Number Would You Like?</h2>
 
-    <a href={{url_for('generate_random', low=1, high=10)}}>
+    <a href={{url_for("generate_random_number_from_button", low=1, high=10)}}>
       <button>A Small Random Number</button>
     </a>
     <br><br>
-    <a href={{url_for('random', low=1000, high=2000)}}>
+    <a href={{url_for("generate_random_number_from_button", low=1000, high=2000)}}>
       <button>A Big Random Number</button>
     </a>
     <br><br>
-    <form action="/">
+    <a href={{url_for("generate_random_number_from_button", low=1, high=6)}}>
+      <button>Roll a dice</button>
+    </a>
+    <br><br>
+    <form action="/random" method="post">
       <label for="low">Minimum:</label>
-      <input type="text" id="low" name="low"><br><br>
+      <input type="text" name="low"><br><br>
       <label for="high">Maximum:</label>
-      <input type="text" id="high" name="high"><br><br>
+      <input type="text" name="high"><br><br>
       <input type="submit" value="Go">
     </form>
-    <p>
-      Your random number is: {{result}}
-    </p>
-    <a href="/random/?low={{low}}&high={{high}}">
+    <br>
+    Result is {{random_value}}<br>
+    <a href={{url_for("generate_random_number_from_button", low={{reroll_low}}, high={{reroll_high}})}}>
       <button>Reroll</button>
     </a>
 </body>

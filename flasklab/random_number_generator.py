@@ -58,6 +58,7 @@ def get_random_city_by_population():
     # adapted from https://learnsql.com/cookbook/how-to-sum-values-of-a-column-in-sql/
     cursor.execute("SELECT SUM(city_population) AS total_population FROM us_cities")
     total_population = cursor.fetchone()
+    print(f"Total urban population {total_population}")
     cursor.execute("SELECT * FROM us_cities ORDER BY city_population DESC")
     all_cities = cursor.fetchall()
     random_resident = random.randint(1, total_population)

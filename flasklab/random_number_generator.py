@@ -30,7 +30,8 @@ def generate_random_number():
         print(f"Recieved GET request. Arguments are {request.args}")
     if special == "city":
         random_city = get_random_city_by_population()
-        return f"{random_city[0]}, {random_city[1]}"
+        rerolling_url = url_for("generate_random_number", special="city")
+        return render_template("random.html", random_value=f"{random_city[0]}, {random_city[1]}", reroll_bound_url=rerolling_url)
     if low is None or high is None:
         return render_template("index.html", additional_body="")
     else:

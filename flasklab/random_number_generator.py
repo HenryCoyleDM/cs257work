@@ -20,15 +20,17 @@ def generate_random_number():
         low = request.form["low"]
         high = request.form["high"]
         print(f"Recieved POST request: {low} to {high}")
-        try:
-            random_int = random.randint(int(low), int(high))
-            rerolling_url = url_for("generate_random_number_get", low=low, high=high)
-            return render_template("random.html", random_value=random_int, reroll_bound_url=rerolling_url)
-        except ValueError:
-            return render_template("index.html", additional_body="Please enter 2 integers")
     else:
+        low = request.args.get("low")
+        high = request.args.get("high")
         print(f"Recieved GET request. Arguments are {request.args}")
         return render_template("index.html", additional_body="")
+    try:
+        random_int = random.randint(int(low), int(high))
+        rerolling_url = url_for("generate_random_number", low=low, high=high)
+        return render_template("random.html", random_value=random_int, reroll_bound_url=rerolling_url)
+    except ValueError:
+        return render_template("index.html", additional_body="Please enter 2 integers")
     
 # adapted from https://pythongeeks.org/python-flask-app-routing/
 @app.route('/random/<int:low>/<int:high>')

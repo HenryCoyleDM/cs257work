@@ -20,6 +20,10 @@
       <button>Roll a dice</button>
     </a>
     <br><br>
+    <a href={{url_for("generate_random_number", special=city)}}>
+      <button>Generate a random US city</button>
+    </a>
+    <br><br>
     <form action="/random" method="get">
       <label for="low">Minimum:</label>
       <input type="text" name="low"><br><br>

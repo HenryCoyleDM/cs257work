@@ -21,10 +21,10 @@ def generate_random_number():
         high = request.form["high"]
         print(f"Recieved POST request: {low} to {high}")
     else:
+        # adapted from https://pythonbasics.org/flask-tutorial-routes/
         low = request.args.get("low")
         high = request.args.get("high")
         print(f"Recieved GET request. Arguments are {request.args}")
-        return render_template("index.html", additional_body="")
     try:
         random_int = random.randint(int(low), int(high))
         rerolling_url = url_for("generate_random_number", low=low, high=high)

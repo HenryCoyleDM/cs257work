@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route('/minesweeper')
 def display_minesweeper_game():
+    print(render_template("minesweeper.html"))
     return render_template("minesweeper.html")
 
 if __name__ == '__main__':

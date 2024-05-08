@@ -1,4 +1,40 @@
-.monospaced{
+.blank{
+    color: black;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.one{
     color: blue;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.two{
+    color: greenyellow;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.three{
+    color: tomato;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.four{
+    color: darkblue;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.five{
+    color: maroon;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.six{
+    color: darkcyan;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.seven{
+    color: darkslategray;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.eight{
+    color: lightsteelblue;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+.color{
+    color: black;
     font-family: "Lucida Console", "Courier New", monospace;
 }

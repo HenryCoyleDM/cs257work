@@ -12,7 +12,7 @@ def get_test_html():
             + render_template("two.html") + render_template("three.html") + render_template("four.html")\
             + render_template("five.html") + render_template("six.html") + render_template("seven.html")\
             + render_template("eight.html") + render_template("flag.html")
-    return line1 + "<br>" + line1
+    return render_template("head.html") + line1 + "<br>" + line1
 
 if __name__ == '__main__':
     my_port = 5113

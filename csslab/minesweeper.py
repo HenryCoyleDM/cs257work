@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/minesweeper')
 def display_minesweeper_game():
-    return get_characters_test_HTML()
+    return get_cell_click_test_HTML()
 
 def get_characters_test_HTML():
     line1 = render_template("blank.html") + render_template("zero.html") + render_template("one.html")\

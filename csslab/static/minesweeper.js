@@ -1,5 +1,5 @@
-function display_coordinates_of_click(x, y) {
+function display_coordinates_of_click() {
     display_paragraph = display.coordinate_display;
-    display_paragraph.innerHTML = x + ", " + y;
-    console.log("A letter was clicked: " + x + ", " + y);
+    display_paragraph.innerHTML = Math.random() + ", " + Math.random();
+    console.log("A letter was clicked");
 }

@@ -2,6 +2,10 @@
     color: black;
     font-family: "Lucida Console", "Courier New", monospace;
 }
+.zero{
+    color: black;
+    font-family: "Lucinda Console", "Courier New", monospace;
+}
 .one{
     color: blue;
     font-family: "Lucida Console", "Courier New", monospace;

@@ -5,8 +5,14 @@ app = Flask(__name__)
 
 @app.route('/minesweeper')
 def display_minesweeper_game():
-    print(render_template("minesweeper.html"))
-    return render_template("minesweeper.html")
+    return get_test_html()
+
+def get_test_html():
+    line1 = render_template("blank.html") + render_template("zero.html") + render_template("one.html")\
+            + render_template("two.html") + render_template("three.html") + render_template("four.html")\
+            + render_template("five.html") + render_template("six.html") + render_template("seven.html")\
+            + render_template("eight.html") + render_template("flag.html")
+    return line1 + "<br>" + line1
 
 if __name__ == '__main__':
     my_port = 5113

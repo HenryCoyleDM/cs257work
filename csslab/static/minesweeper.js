@@ -6,6 +6,7 @@ grid = new Array(grid_width * grid_height);
 
 function instantiate_field() {
     cell_grid_div = document.getElementById("cell_grid");
+    console.log("found cell grid: "+toString(cell_grid_div));
     for (y=0; y<grid_height; y++) {
         for (x=0; x<grid_width; x++) {
             new_cell_html = document.createElement("span");

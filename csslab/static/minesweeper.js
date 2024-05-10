@@ -38,7 +38,7 @@ const cell_text_templates = ['<span class="zero">&nbsp</span>',
                              '<span class="seven">7</span>',
                              '<span class="eight">8</span>',
                              '<span class="blank">&#x2588</span>',
-                             '<span class="flag">&#x2691</span>']
+                             '<span class="flag" width="1em">&#x2691</span>']
 
 function assign_symbol_and_colors_to_HTML_cell(value, cell) {
     // https://www.w3docs.com/snippets/javascript/how-to-create-a-new-dom-element-from-html-string.html

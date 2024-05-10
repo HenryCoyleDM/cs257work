@@ -11,7 +11,7 @@ function instantiate_field() {
         console.log("Couldn't find grid");
         return;
     }
-    console.log("found cell grid: "+cell_grid_div.innerHTML);
+    console.log("found cell grid: "+cell_grid_div);
     for (y=0; y<grid_height; y++) {
         for (x=0; x<grid_width; x++) {
             new_cell_html = document.createElement("span");
@@ -21,6 +21,8 @@ function instantiate_field() {
             cell_grid_div.appendChild(new_cell_html);
             grid[x + y * grid_width] = {value: value, element: new_cell_html};
         }
+        line_break = document.createElement("br");
+        cell_grid_div.appendChild(line_break);
     }
 }
 

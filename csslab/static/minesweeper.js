@@ -6,16 +6,15 @@ grid = new Array(grid_width * grid_height);
 
 function instantiate_field() {
     console.log("called instantiate_field");
-    alert("I am here!");
     cell_grid_div = document.getElementById("cell_grid");
-    console.log("found cell grid: "+toString(cell_grid_div));
+    console.log("found cell grid: "+toString(cell_grid_div.innerHTML));
     for (y=0; y<grid_height; y++) {
         for (x=0; x<grid_width; x++) {
             new_cell_html = document.createElement("span");
             console.log("Created new HTML element: " + toString(new_cell_html));
             value = Math.floor(Math.random() * 10);
             assign_symbol_and_colors_to_HTML_cell(value, new_cell_html);
-            cell_grid_div.append_child(new_cell_html);
+            cell_grid_div.appendChild(new_cell_html);
             grid[x + y * grid_width] = {value: value, element: new_cell_html};
         }
     }

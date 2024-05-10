@@ -6,7 +6,11 @@ grid = new Array(grid_width * grid_height);
 
 function instantiate_field() {
     console.log("called instantiate_field");
-    cell_grid_div = document.body.getElementById("cell_grid");
+    cell_grid_div = document.getElementById("cell_grid");
+    if (cell_grid_div === undefined) {
+        console.log("Couldn't find grid");
+        return;
+    }
     console.log("found cell grid: "+toString(cell_grid_div.innerHTML));
     for (y=0; y<grid_height; y++) {
         for (x=0; x<grid_width; x++) {

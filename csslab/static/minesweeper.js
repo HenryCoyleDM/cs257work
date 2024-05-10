@@ -44,7 +44,7 @@ function assign_symbol_and_colors_to_HTML_cell(value, cell) {
     // https://www.w3docs.com/snippets/javascript/how-to-create-a-new-dom-element-from-html-string.html
     template = document.createElement('template');
     template.innerHTML = cell_text_templates[value];
-    console.log("Created a template: "+template.innerHTML);
+    console.log("Created a template: "+template.content);
     cell.innerHTML = template.content.innerHTML;
     // https://stackoverflow.com/questions/2221160/how-to-change-a-css-class-style-through-javascript
     cell.className = template.content.className;

@@ -18,7 +18,7 @@ def get_cell_click_test_HTML():
     return render_template("click_test.html")
 
 def create_blank_block_of_cells():
-    return '<div id="cell_grid" onload="instantiate_field()"></div>'
+    return '<div id="cell_grid" onLoad="instantiate_field()"></div>'
 
 def get_empty_grid_of_cells():
     return render_template("head.html") + create_blank_block_of_cells()

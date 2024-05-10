@@ -5,18 +5,19 @@ const grid_height = 10;
 grid = new Array(grid_width * grid_height);
 
 function instantiate_field() {
-    console.log("called instantiate_field");
+    // console.log("called instantiate_field");
     cell_grid_div = document.getElementById("cell_grid");
     if (cell_grid_div === undefined) {
         console.log("Couldn't find grid");
         return;
     }
-    console.log("found cell grid: "+cell_grid_div);
+    // console.log("found cell grid: "+cell_grid_div);
     for (y=0; y<grid_height; y++) {
         for (x=0; x<grid_width; x++) {
+            // https://www.w3schools.com/jsref/met_node_appendchild.asp
             new_cell_html = document.createElement("span");
-            console.log("Created new HTML element: " + new_cell_html);
-            value = Math.floor(Math.random() * 10);
+            // console.log("Created new HTML element: " + new_cell_html);
+            value = Math.floor(Math.random() * 11) - 1;
             assign_symbol_and_colors_to_HTML_cell(value, new_cell_html);
             cell_grid_div.appendChild(new_cell_html);
             grid[x + y * grid_width] = {value: value, element: new_cell_html};
@@ -26,11 +27,26 @@ function instantiate_field() {
     }
 }
 
-is_red = true;
+// HTML strings representing the symbology for each value of a cell
+const cell_text_templates = ['<span class="zero">&nbsp</span>',
+                             '<span class="one">1</span>',
+                             '<span class="two">2</span>',
+                             '<span class="three">3</span>',
+                             '<span class="four">4</span>',
+                             '<span class="five">5</span>',
+                             '<span class="six">6</span>',
+                             '<span class="seven">7</span>',
+                             '<span class="eight">8</span>',
+                             '<span class="blank">&#x2588</span>',
+                             '<span class="flag">&#x2691</span>']
+
 function assign_symbol_and_colors_to_HTML_cell(value, cell) {
-    cell.innerHTML = value;
-    cell.style.color = (is_red ? "red" : "blue");
-    is_red = !is_red;
+    // https://www.w3docs.com/snippets/javascript/how-to-create-a-new-dom-element-from-html-string.html
+    template = document.createElement('template');
+    template.innerHTML = cell_text_templates[value];
+    cell.innerHTML = template.content.innerHTML;
+    // https://stackoverflow.com/questions/2221160/how-to-change-a-css-class-style-through-javascript
+    cell.className = template.content.className;
 }
 
 function display_coordinates_of_click(x, y) {

@@ -11,11 +11,11 @@ function instantiate_field() {
         console.log("Couldn't find grid");
         return;
     }
-    console.log("found cell grid: "+toString(cell_grid_div.innerHTML));
+    console.log("found cell grid: "+cell_grid_div.innerHTML);
     for (y=0; y<grid_height; y++) {
         for (x=0; x<grid_width; x++) {
             new_cell_html = document.createElement("span");
-            console.log("Created new HTML element: " + toString(new_cell_html));
+            console.log("Created new HTML element: " + new_cell_html);
             value = Math.floor(Math.random() * 10);
             assign_symbol_and_colors_to_HTML_cell(value, new_cell_html);
             cell_grid_div.appendChild(new_cell_html);
@@ -26,7 +26,7 @@ function instantiate_field() {
 
 is_red = true;
 function assign_symbol_and_colors_to_HTML_cell(value, cell) {
-    cell.innerHTML = toString(value);
+    cell.innerHTML = value;
     cell.style.color = (is_red ? "red" : "blue");
     is_red = !is_red;
 }

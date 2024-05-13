@@ -115,8 +115,8 @@ function set_cell_value_and_update_colors(x, y, new_value) {
 
 function get_number_of_neighboring_bombs(x, y) {
     total = 0;
-    for (i = x-1; i <= x+1; i++) {
-        for (j = y-1; j <= y+1; j++) {
+    for (var i = x-1; i <= x+1; i++) {
+        for (var j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
                 test_value = get_cell_value(i, j);
                 if (test_value == BOMB || test_value == FLAG) {
@@ -130,8 +130,8 @@ function get_number_of_neighboring_bombs(x, y) {
 
 function get_number_of_neighboring_flags(x, y) {
     total = 0;
-    for (i = x-1; i <= x+1; i++) {
-        for (j = y-1; j <= y+1; j++) {
+    for (var i = x-1; i <= x+1; i++) {
+        for (var j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
                 test_value = get_cell_value(i, j);
                 if (test_value == FLAG || test_value == INCORRECT_FLAG) {
@@ -156,7 +156,7 @@ const number_of_bombs = 20;
 function get_random_distribution_of_bombs() {
     grid_of_bombs = new Array(grid_width * grid_height);
     grid_of_bombs.fill(UNEXPLORED);
-    for (i = 0; i < number_of_bombs; i++) {
+    for (var i = 0; i < number_of_bombs; i++) {
         found_a_valid_position = false;
         while (!found_a_valid_position) {
             random_position = Math.floor(Math.random() * grid_width * grid_height);
@@ -175,8 +175,8 @@ function lose() {
 
 function uncover_all_neighboring_cells(x, y) {
     console.log("Mass excavating at ("+x+", "+y+")");
-    for (i = x-1; i <= x+1; i++) {
-        for (j = y-1; j <= y+1; j++) {
+    for (var i = x-1; i <= x+1; i++) {
+        for (var j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
                 test_value = get_cell_value(i, j);
                 console.log("Testing ("+i+", "+j+") for mass excavation. Its value is "+test_value);

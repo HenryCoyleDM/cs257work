@@ -75,3 +75,13 @@
     line-height: 1.0;
     cursor: pointer;
 }
+/* https://stackoverflow.com/questions/114543/how-can-i-horizontally-center-an-element */
+#cell_grid {  
+    border: 0.05em solid black;
+}
+#cell_grid_bounding_box {
+    border: 0.05em solid red;
+    width:100%;
+    display: flex;
+    justify-content: center;
+}

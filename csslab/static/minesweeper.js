@@ -54,8 +54,8 @@ function assign_symbol_and_colors_to_HTML_cell(value, cell, x, y) {
     // https://stackoverflow.com/questions/2221160/how-to-change-a-css-class-style-through-javascript
     cell.className = template_clone.className;
     // https://www.w3schools.com/jsref/event_onclick.asp
-    cell.onclick = function() {
-        cell_is_clicked(x, y);
+    cell.onclick = function(event) {
+        cell_is_clicked(x, y, event);
     }
 }
 
@@ -68,6 +68,13 @@ function display_coordinates_of_click(x, y) {
     display_incrementer.innerHTML = incrementer;
 }
 
-function cell_is_clicked(x, y) {
-    console.log("Clicked cell: "+x+", "+y);
+function cell_is_clicked(x, y, event) {
+    // https://stackoverflow.com/questions/2405771/is-right-click-a-javascript-event
+    var is_right_mouse_button;
+    if ("which" in e) {
+        is_right_mouse_button = e.which == 3;
+    } else if ("button" in e) {
+        is_right_mouse_button = e.button == 2;
+    }
+    console.log((is_right_mouse_button ? "Right clicked (" : "Clicked (")+x+", "+y+")");
 }

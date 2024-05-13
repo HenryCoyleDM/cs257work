@@ -18,7 +18,8 @@ function instantiate_field() {
             new_cell_html = document.createElement("span");
             // console.log("Created new HTML element: " + new_cell_html);
             value = Math.floor(Math.random() * 12);
-            assign_symbol_and_colors_to_HTML_cell(value, new_cell_html, x, y);
+            assign_symbol_and_colors_to_HTML_cell(value, new_cell_html);
+            assign_click_function_to_HTML_cell(cell, x, y);
             cell_grid_div.appendChild(new_cell_html);
             grid[x + y * grid_width] = {value: value, element: new_cell_html};
         }
@@ -43,7 +44,7 @@ const cell_text_templates = ['<span class="zero">&nbsp</span>',
 
                              // flag symbol: &#x2691, unfortunately not monospaced
 
-function assign_symbol_and_colors_to_HTML_cell(value, cell, x, y) {
+function assign_symbol_and_colors_to_HTML_cell(value, cell) {
     // https://www.w3docs.com/snippets/javascript/how-to-create-a-new-dom-element-from-html-string.html
     template = document.createElement('template');
     template.innerHTML = cell_text_templates[value];
@@ -53,6 +54,9 @@ function assign_symbol_and_colors_to_HTML_cell(value, cell, x, y) {
     cell.innerHTML = template_clone.innerHTML;
     // https://stackoverflow.com/questions/2221160/how-to-change-a-css-class-style-through-javascript
     cell.className = template_clone.className;
+}
+
+function assign_click_function_to_HTML_cell(cell, x, y) {
     // https://www.w3schools.com/jsref/event_onclick.asp
     cell.onclick = function(event) {
         cell_is_clicked(x, y, event);
@@ -68,10 +72,25 @@ function display_coordinates_of_click(x, y) {
     display_incrementer.innerHTML = incrementer;
 }
 
+const UNEXPLORED = 9;
+const BOMB = 10;
+const FLAG = 11;
+
 function cell_is_clicked(x, y, event) {
     // https://stackoverflow.com/questions/2405771/is-right-click-a-javascript-event
     var is_ctrl_key_pressed;
     // console.log(event);
     is_ctrl_key_pressed = event.ctrlKey;
     console.log((is_ctrl_key_pressed ? "Control clicked (" : "Clicked (")+x+", "+y+")");
+    cell_value = grid[x + grid_width * y].value;
+    if (cell_value == UNEXPLORED) {
+        new_value = 0;
+        grid[x + grid_width * y].value = new_value;
+        assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y], x, y);
+    } else if (cell_value == BOMB) {
+        new_value = FLAG;
+        grid[x + grid_width * y].value = new_value;
+        alert("BOOM!");
+        assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y], x, y);
+    }
 }

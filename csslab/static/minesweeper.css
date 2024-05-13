@@ -10,58 +10,68 @@
     font-family: "Lucinda Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .one{
     color: blue;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .two{
     color: green;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .three{
     color: tomato;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .four{
     color: darkblue;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .five{
     color: maroon;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .six{
     color: darkcyan;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .seven{
     color: darkslategray;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .eight{
     color: lightsteelblue;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }
 .flag{
     color: crimson;
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 24px;
     line-height: 1.0;
+    cursor: pointer;
 }

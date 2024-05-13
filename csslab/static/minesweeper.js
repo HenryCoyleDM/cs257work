@@ -12,12 +12,13 @@ function instantiate_field() {
         return;
     }
     // console.log("found cell grid: "+cell_grid_div);
+    grid_of_bombs = get_random_distribution_of_bombs();
     for (y=0; y<grid_height; y++) {
         for (x=0; x<grid_width; x++) {
             // https://www.w3schools.com/jsref/met_node_appendchild.asp
             new_cell_html = document.createElement("span");
             // console.log("Created new HTML element: " + new_cell_html);
-            value = Math.floor(Math.random() * 12);
+            value = grid_of_bombs[x + grid_width * y];
             assign_symbol_and_colors_to_HTML_cell(value, new_cell_html);
             assign_click_function_to_HTML_cell(new_cell_html, x, y);
             cell_grid_div.appendChild(new_cell_html);
@@ -82,15 +83,53 @@ function cell_is_clicked(x, y, event) {
     // console.log(event);
     is_ctrl_key_pressed = event.ctrlKey;
     console.log((is_ctrl_key_pressed ? "Control clicked (" : "Clicked (")+x+", "+y+")");
-    cell_value = grid[x + grid_width * y].value;
+    cell_value = get_cell_value(x, y);
     if (cell_value == UNEXPLORED) {
-        new_value = 0;
+        new_value = get_number_of_neighboring_bombs(x, y);
         grid[x + grid_width * y].value = new_value;
         assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y].element, x, y);
     } else if (cell_value == BOMB) {
-        new_value = FLAG;
-        grid[x + grid_width * y].value = new_value;
         alert("BOOM!");
-        assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y].element, x, y);
     }
+}
+
+function get_number_of_neighboring_bombs(x, y) {
+    total = 0;
+    for (i = x-1; i <= x+1; i++) {
+        for (j = y-1; j <= y+1; j++) {
+            if (is_in_bounds(x, y) && (i != x || j != y)) {
+                test_value = get_cell_value(i, j);
+                if (test_value == BOMB || test_value == FLAG) {
+                    total++;
+                }
+            }
+        }
+    }
+    return total;
+}
+
+function get_cell_value(x, y) {
+    return grid[x + grid_width * y].value;
+}
+
+function is_in_bounds(x, y) {
+    return x >= 0 && x < grid_width && y >= 0 && y < grid_height;
+}
+
+const number_of_bombs = 20;
+
+function get_random_distribution_of_bombs() {
+    grid_of_bombs = new Array(grid_width * grid_height);
+    grid_of_bombs.fill(UNEXPLORED);
+    for (i = 0; i < number_of_bombs; i++) {
+        found_a_valid_position = false;
+        while (!found_a_valid_position) {
+            random_position = Math.floor(Math.random() * grid_width * grid_height);
+            if (grid_of_bombs[random_position] == UNEXPLORED) {
+                grid_of_bombs[random_position] = BOMB;
+                found_a_valid_position = true;
+            }
+        }
+    }
+    return grid_of_bombs;
 }

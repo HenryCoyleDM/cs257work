@@ -12,19 +12,19 @@ function instantiate_field() {
         return;
     }
     // console.log("found cell grid: "+cell_grid_div);
-    grid_of_bombs = get_random_distribution_of_bombs();
+    var grid_of_bombs = get_random_distribution_of_bombs();
     for (y=0; y<grid_height; y++) {
         for (x=0; x<grid_width; x++) {
             // https://www.w3schools.com/jsref/met_node_appendchild.asp
-            new_cell_html = document.createElement("span");
+            var new_cell_html = document.createElement("span");
             // console.log("Created new HTML element: " + new_cell_html);
-            value = grid_of_bombs[x + grid_width * y];
+            var value = grid_of_bombs[x + grid_width * y];
             assign_symbol_and_colors_to_HTML_cell(value, new_cell_html);
             assign_click_function_to_HTML_cell(new_cell_html, x, y);
             cell_grid_div.appendChild(new_cell_html);
             grid[x + y * grid_width] = {value: value, element: new_cell_html};
         }
-        line_break = document.createElement("br");
+        var line_break = document.createElement("br");
         cell_grid_div.appendChild(line_break);
     }
 }
@@ -48,7 +48,7 @@ const cell_text_templates = ['<span class="zero">&nbsp</span>',
 
 function assign_symbol_and_colors_to_HTML_cell(value, cell) {
     // https://www.w3docs.com/snippets/javascript/how-to-create-a-new-dom-element-from-html-string.html
-    template = document.createElement('template');
+    var template = document.createElement('template');
     template.innerHTML = cell_text_templates[value];
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
     template_clone = template.content.children[0];
@@ -64,15 +64,6 @@ function assign_click_function_to_HTML_cell(cell, x, y) {
     }
 }
 
-function display_coordinates_of_click(x, y) {
-    display_paragraph = document.getElementById("coordinate_display");
-    display_paragraph.innerHTML = x + ", " + y;
-    incrementer += x + y;
-    console.log("A letter was clicked: " + x + ", " + y);
-    display_incrementer = document.getElementById("incrementer_display");
-    display_incrementer.innerHTML = incrementer;
-}
-
 const UNEXPLORED = 9;
 const BOMB = 10;
 const FLAG = 11;
@@ -82,9 +73,9 @@ function cell_is_clicked(x, y, event) {
     // https://stackoverflow.com/questions/2405771/is-right-click-a-javascript-event
     var is_ctrl_key_pressed;
     // console.log(event);
-    is_ctrl_key_pressed = event.ctrlKey;
+    var is_ctrl_key_pressed = event.ctrlKey;
     // console.log((is_ctrl_key_pressed ? "Control clicked (" : "Clicked (")+x+", "+y+")");
-    cell_value = get_cell_value(x, y);
+    var cell_value = get_cell_value(x, y);
     if (is_ctrl_key_pressed) {
         if (cell_value == FLAG) {
             set_cell_value_and_update_colors(x, y, BOMB);
@@ -95,7 +86,7 @@ function cell_is_clicked(x, y, event) {
         }
     } else {
         if (cell_value == UNEXPLORED) {
-            neighboring_bombs = get_number_of_neighboring_bombs(x, y);
+            var neighboring_bombs = get_number_of_neighboring_bombs(x, y);
             set_cell_value_and_update_colors(x, y, neighboring_bombs);
         } else if (cell_value == BOMB) {
             lose();
@@ -114,11 +105,11 @@ function set_cell_value_and_update_colors(x, y, new_value) {
 }
 
 function get_number_of_neighboring_bombs(x, y) {
-    total = 0;
+    var total = 0;
     for (var i = x-1; i <= x+1; i++) {
         for (var j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
-                test_value = get_cell_value(i, j);
+                var test_value = get_cell_value(i, j);
                 if (test_value == BOMB || test_value == FLAG) {
                     total++;
                 }
@@ -129,11 +120,11 @@ function get_number_of_neighboring_bombs(x, y) {
 }
 
 function get_number_of_neighboring_flags(x, y) {
-    total = 0;
+    var total = 0;
     for (var i = x-1; i <= x+1; i++) {
         for (var j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
-                test_value = get_cell_value(i, j);
+                var test_value = get_cell_value(i, j);
                 if (test_value == FLAG || test_value == INCORRECT_FLAG) {
                     total++;
                 }
@@ -154,12 +145,12 @@ function is_in_bounds(x, y) {
 const number_of_bombs = 20;
 
 function get_random_distribution_of_bombs() {
-    grid_of_bombs = new Array(grid_width * grid_height);
+    var grid_of_bombs = new Array(grid_width * grid_height);
     grid_of_bombs.fill(UNEXPLORED);
     for (var i = 0; i < number_of_bombs; i++) {
-        found_a_valid_position = false;
+        var found_a_valid_position = false;
         while (!found_a_valid_position) {
-            random_position = Math.floor(Math.random() * grid_width * grid_height);
+            var random_position = Math.floor(Math.random() * grid_width * grid_height);
             if (grid_of_bombs[random_position] == UNEXPLORED) {
                 grid_of_bombs[random_position] = BOMB;
                 found_a_valid_position = true;
@@ -178,12 +169,12 @@ function uncover_all_neighboring_cells(x, y) {
     for (var i = x-1; i <= x+1; i++) {
         for (var j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
-                test_value = get_cell_value(i, j);
+                var test_value = get_cell_value(i, j);
                 console.log("Testing ("+i+", "+j+") for mass excavation. Its value is "+test_value);
                 if (test_value == BOMB) {
                     lose();
                 } else if (test_value == UNEXPLORED) {
-                    neighboring_bombs = get_number_of_neighboring_bombs(i, j);
+                    var neighboring_bombs = get_number_of_neighboring_bombs(i, j);
                     console.log("Uncovering cell ("+i+", "+j+"). There are "+neighboring_bombs+" neighboring bombs")
                     set_cell_value_and_update_colors(i, j, neighboring_bombs);
                 }

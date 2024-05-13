@@ -83,7 +83,7 @@ function cell_is_clicked(x, y, event) {
     var is_ctrl_key_pressed;
     // console.log(event);
     is_ctrl_key_pressed = event.ctrlKey;
-    console.log((is_ctrl_key_pressed ? "Control clicked (" : "Clicked (")+x+", "+y+")");
+    // console.log((is_ctrl_key_pressed ? "Control clicked (" : "Clicked (")+x+", "+y+")");
     cell_value = get_cell_value(x, y);
     if (is_ctrl_key_pressed) {
         if (cell_value == FLAG) {
@@ -178,8 +178,8 @@ function uncover_all_neighboring_cells(x, y) {
     for (i = x-1; i <= x+1; i++) {
         for (j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
-                console.log("Testing ("+i+", "+j+") for mass excavation");
                 test_value = get_cell_value(i, j);
+                console.log("Testing ("+i+", "+j+") for mass excavation. Its value is "+test_value);
                 if (test_value == BOMB) {
                     lose();
                 } else if (test_value == UNEXPLORED) {

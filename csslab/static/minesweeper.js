@@ -184,6 +184,7 @@ function uncover_all_neighboring_cells(x, y) {
                     lose();
                 } else if (test_value == UNEXPLORED) {
                     neighboring_bombs = get_number_of_neighboring_bombs(i, j);
+                    console.log("Uncovering cell ("+i+", "+j+"). There are "+neighboring_bombs+" neighboring bombs")
                     set_cell_value_and_update_colors(i, j, neighboring_bombs);
                 }
             }

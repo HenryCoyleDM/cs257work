@@ -3,7 +3,7 @@ from flask import render_template
 
 app = Flask(__name__)
 
-@app.route('/minesweeper')
+@app.route('/')
 def display_minesweeper_game():
     return get_empty_grid_of_cells()
 

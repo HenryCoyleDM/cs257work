@@ -182,8 +182,8 @@ function uncover_all_neighboring_cells(x, y) {
                 if (test_value == BOMB) {
                     lose();
                 } else if (test_value == UNEXPLORED) {
-                    neighboring_bombs = get_number_of_neighboring_bombs(x, y);
-                    set_cell_value_and_update_colors(x, y, neighboring_bombs);
+                    neighboring_bombs = get_number_of_neighboring_bombs(i, j);
+                    set_cell_value_and_update_colors(i, j, neighboring_bombs);
                 }
             }
         }

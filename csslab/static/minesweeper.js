@@ -90,9 +90,12 @@ function cell_is_clicked(x, y, event) {
         if (cell_value == UNEXPLORED) {
             var neighboring_bombs = get_number_of_neighboring_bombs(x, y);
             set_cell_value_and_update_colors(x, y, neighboring_bombs);
+            if (neighboring_bombs == 0) {
+                uncover_all_neighboring_cells(x, y);
+            }
         } else if (cell_value == BOMB) {
             lose();
-        } else if (cell_value >= 1 && cell_value <= 7) {
+        } else if (cell_value >= 0 && cell_value <= 7) {
             if (cell_value == get_number_of_neighboring_flags(x, y)) {
                 uncover_all_neighboring_cells(x, y);
             }
@@ -166,8 +169,20 @@ function lose() {
     alert("BOOM!");
 }
 
+mass_excavation_stack = [];
+
 function uncover_all_neighboring_cells(x, y) {
     console.log("Mass excavating at ("+x+", "+y+")");
+    mass_excavation_stack.push([x, y]);
+    while (mass_excavation_stack.length > 0) {
+        process_top_of_mass_excavation_stack();
+    }
+}
+
+function process_top_of_mass_excavation_stack() {
+    var coords_to_process = mass_excavation_stack.pop();
+    var x = coords_to_process[0];
+    var y = coords_to_process[1];
     for (var i = x-1; i <= x+1; i++) {
         for (var j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
@@ -179,6 +194,9 @@ function uncover_all_neighboring_cells(x, y) {
                     var neighboring_bombs = get_number_of_neighboring_bombs(i, j);
                     console.log("Uncovering cell ("+i+", "+j+"). There are "+neighboring_bombs+" neighboring bombs")
                     set_cell_value_and_update_colors(i, j, neighboring_bombs);
+                    if (neighboring_bombs == 0) {
+                        mass_excavation_stack.push([i, j]);
+                    }
                 }
             }
         }

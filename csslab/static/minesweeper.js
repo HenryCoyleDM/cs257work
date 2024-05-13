@@ -41,6 +41,7 @@ const cell_text_templates = ['<span class="zero">&nbsp</span>',
                              '<span class="eight">8</span>',
                              '<span class="blank">&#x2588</span>',
                              '<span class="blank">&#x2588</span>',
+                             '<span class="flag">!</span>',
                              '<span class="flag">!</span>']
 
                              // flag symbol: &#x2691, unfortunately not monospaced
@@ -76,6 +77,7 @@ function display_coordinates_of_click(x, y) {
 const UNEXPLORED = 9;
 const BOMB = 10;
 const FLAG = 11;
+const INCORRECT_FLAG = 12;
 
 function cell_is_clicked(x, y, event) {
     // https://stackoverflow.com/questions/2405771/is-right-click-a-javascript-event
@@ -84,13 +86,31 @@ function cell_is_clicked(x, y, event) {
     is_ctrl_key_pressed = event.ctrlKey;
     console.log((is_ctrl_key_pressed ? "Control clicked (" : "Clicked (")+x+", "+y+")");
     cell_value = get_cell_value(x, y);
-    if (cell_value == UNEXPLORED) {
-        new_value = get_number_of_neighboring_bombs(x, y);
-        grid[x + grid_width * y].value = new_value;
-        assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y].element, x, y);
-    } else if (cell_value == BOMB) {
-        alert("BOOM!");
+    if (is_ctrl_key_pressed) {
+        if (cell_value == FLAG) {
+            set_cell_value_and_update_colors(x, y, BOMB);
+        } else if (cell_value == INCORRECT_FLAG) {
+            set_cell_value_and_update_colors(x, y, UNEXPLORED);
+        } else {
+            set_cell_value_and_update_colors(x, y, FLAG);
+        }
+    } else {
+        if (cell_value == UNEXPLORED) {
+            neighboring_bombs = get_number_of_neighboring_bombs(x, y);
+            set_cell_value_and_update_colors(x, y, neighboring_bombs);
+        } else if (cell_value == BOMB) {
+            lose();
+        } else if (cell_value >= 1 && cell_value <= 7) {
+            if (cell_value == get_number_of_neighboring_flags(x, y)) {
+                uncover_all_neighboring_cells(x, y);
+            }
+        }
     }
+}
+
+function set_cell_value_and_update_colors(x, y, new_value) {
+    grid[x + grid_width * y].value = new_value;
+    assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y].element, x, y);
 }
 
 function get_number_of_neighboring_bombs(x, y) {
@@ -100,6 +120,21 @@ function get_number_of_neighboring_bombs(x, y) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
                 test_value = get_cell_value(i, j);
                 if (test_value == BOMB || test_value == FLAG) {
+                    total++;
+                }
+            }
+        }
+    }
+    return total;
+}
+
+function get_number_of_neighboring_flags(x, y) {
+    total = 0;
+    for (i = x-1; i <= x+1; i++) {
+        for (j = y-1; j <= y+1; j++) {
+            if (is_in_bounds(i, j) && (i != x || j != y)) {
+                test_value = get_cell_value(i, j);
+                if (test_value == FLAG || test_value == INCORRECT_FLAG) {
                     total++;
                 }
             }
@@ -132,4 +167,24 @@ function get_random_distribution_of_bombs() {
         }
     }
     return grid_of_bombs;
+}
+
+function lose() {
+    alert("BOOM!");
+}
+
+function uncover_all_neighboring_cells(x, y) {
+    for (i = x-1; i <= x+1; i++) {
+        for (j = y-1; j <= y+1; j++) {
+            if (is_in_bounds(i, j) && (i != x || j != y)) {
+                test_value = get_cell_value(i, j);
+                if (test_value == BOMB) {
+                    lose();
+                } else if (test_value == UNEXPLORED) {
+                    neighboring_bombs = get_number_of_neighboring_bombs(x, y);
+                    set_cell_value_and_update_colors(x, y, neighboring_bombs);
+                }
+            }
+        }
+    }
 }

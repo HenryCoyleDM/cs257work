@@ -52,7 +52,6 @@ function assign_symbol_and_colors_to_HTML_cell(value, cell) {
     template.innerHTML = cell_text_templates[value];
     // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
     template_clone = template.content.children[0];
-    console.log("Created a template: "+template_clone);
     cell.innerHTML = template_clone.innerHTML;
     // https://stackoverflow.com/questions/2221160/how-to-change-a-css-class-style-through-javascript
     cell.className = template_clone.className;
@@ -111,6 +110,7 @@ function cell_is_clicked(x, y, event) {
 function set_cell_value_and_update_colors(x, y, new_value) {
     grid[x + grid_width * y].value = new_value;
     assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y].element, x, y);
+    console.log("Changing symbol at ("+x+", "+y+") to "+new_value);
 }
 
 function get_number_of_neighboring_bombs(x, y) {

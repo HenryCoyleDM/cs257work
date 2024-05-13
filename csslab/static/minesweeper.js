@@ -86,11 +86,11 @@ function cell_is_clicked(x, y, event) {
     if (cell_value == UNEXPLORED) {
         new_value = 0;
         grid[x + grid_width * y].value = new_value;
-        assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y], x, y);
+        assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y].element, x, y);
     } else if (cell_value == BOMB) {
         new_value = FLAG;
         grid[x + grid_width * y].value = new_value;
         alert("BOOM!");
-        assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y], x, y);
+        assign_symbol_and_colors_to_HTML_cell(new_value, grid[x + grid_width * y].element, x, y);
     }
 }

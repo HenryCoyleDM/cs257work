@@ -70,12 +70,8 @@ function display_coordinates_of_click(x, y) {
 
 function cell_is_clicked(x, y, event) {
     // https://stackoverflow.com/questions/2405771/is-right-click-a-javascript-event
-    var is_right_mouse_button;
+    var is_shift_key_pressed;
     console.log(event);
-    if ("which" in event) {
-        is_right_mouse_button = event.which == 3;
-    } else if ("button" in event) {
-        is_right_mouse_button = event.button == 2;
-    }
-    console.log((is_right_mouse_button ? "Right clicked (" : "Clicked (")+x+", "+y+")");
+    is_shift_key_pressed = event.shiftKey;
+    console.log((is_shift_key_pressed ? "Shift clicked (" : "Clicked (")+x+", "+y+")");
 }

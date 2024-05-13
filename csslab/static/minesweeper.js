@@ -82,14 +82,14 @@ function cell_is_clicked(x, y, event) {
     if (is_ctrl_key_pressed) {
         if (cell_value == FLAG) {
             set_cell_value_and_update_colors(x, y, BOMB);
-            number_of_bombs_remaining--;
+            number_of_bombs_remaining++;
         } else if (cell_value == INCORRECT_FLAG) {
             set_cell_value_and_update_colors(x, y, UNEXPLORED);
         } else if (cell_value == UNEXPLORED ) {
             set_cell_value_and_update_colors(x, y, INCORRECT_FLAG);
         } else if (cell_value == BOMB) {
             set_cell_value_and_update_colors(x, y, FLAG);
-            number_of_bombs_remaining++;
+            number_of_bombs_remaining--;
             if (number_of_bombs_remaining == 0) {
                 win();
             }

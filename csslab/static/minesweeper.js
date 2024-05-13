@@ -1,8 +1,11 @@
 const grid_width = 20;
 const grid_height = 10;
+const number_of_bombs = 20;
 
 // grid of cells. each cell contains an object containing the cell's value along with a reference to the character that is displaying that cell
 grid = new Array(grid_width * grid_height);
+
+number_of_bombs_remaining = number_of_bombs;
 
 function instantiate_field() {
     // console.log("called instantiate_field");
@@ -79,12 +82,17 @@ function cell_is_clicked(x, y, event) {
     if (is_ctrl_key_pressed) {
         if (cell_value == FLAG) {
             set_cell_value_and_update_colors(x, y, BOMB);
+            number_of_bombs_remaining--;
         } else if (cell_value == INCORRECT_FLAG) {
             set_cell_value_and_update_colors(x, y, UNEXPLORED);
         } else if (cell_value == UNEXPLORED ) {
             set_cell_value_and_update_colors(x, y, INCORRECT_FLAG);
         } else if (cell_value == BOMB) {
             set_cell_value_and_update_colors(x, y, FLAG);
+            number_of_bombs_remaining++;
+            if (number_of_bombs_remaining == 0) {
+                win();
+            }
         }
     } else {
         if (cell_value == UNEXPLORED) {
@@ -101,6 +109,10 @@ function cell_is_clicked(x, y, event) {
             }
         }
     }
+}
+
+function win() {
+    alert("You survived!");
 }
 
 function set_cell_value_and_update_colors(x, y, new_value) {
@@ -147,8 +159,6 @@ function is_in_bounds(x, y) {
     return x >= 0 && x < grid_width && y >= 0 && y < grid_height;
 }
 
-const number_of_bombs = 20;
-
 function get_random_distribution_of_bombs() {
     var grid_of_bombs = new Array(grid_width * grid_height);
     grid_of_bombs.fill(UNEXPLORED);
@@ -172,7 +182,7 @@ function lose() {
 mass_excavation_stack = [];
 
 function uncover_all_neighboring_cells(x, y) {
-    console.log("Mass excavating at ("+x+", "+y+")");
+    // console.log("Mass excavating at ("+x+", "+y+")");
     mass_excavation_stack.push([x, y]);
     while (mass_excavation_stack.length > 0) {
         process_top_of_mass_excavation_stack();
@@ -187,12 +197,12 @@ function process_top_of_mass_excavation_stack() {
         for (var j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {
                 var test_value = get_cell_value(i, j);
-                console.log("Testing ("+i+", "+j+") for mass excavation. Its value is "+test_value);
+                // console.log("Testing ("+i+", "+j+") for mass excavation. Its value is "+test_value);
                 if (test_value == BOMB) {
                     lose();
                 } else if (test_value == UNEXPLORED) {
                     var neighboring_bombs = get_number_of_neighboring_bombs(i, j);
-                    console.log("Uncovering cell ("+i+", "+j+"). There are "+neighboring_bombs+" neighboring bombs")
+                    // console.log("Uncovering cell ("+i+", "+j+"). There are "+neighboring_bombs+" neighboring bombs")
                     set_cell_value_and_update_colors(i, j, neighboring_bombs);
                     if (neighboring_bombs == 0) {
                         mass_excavation_stack.push([i, j]);

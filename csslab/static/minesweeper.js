@@ -1,6 +1,6 @@
-const grid_width = 20;
-const grid_height = 10;
-const number_of_bombs = 20;
+const grid_width = 80;
+const grid_height = 40;
+const number_of_bombs = 125;
 
 // grid of cells. each cell contains an object containing the cell's value along with a reference to the character that is displaying that cell
 grid = new Array(grid_width * grid_height);

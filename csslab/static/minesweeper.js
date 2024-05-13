@@ -17,8 +17,8 @@ function instantiate_field() {
             // https://www.w3schools.com/jsref/met_node_appendchild.asp
             new_cell_html = document.createElement("span");
             // console.log("Created new HTML element: " + new_cell_html);
-            value = Math.floor(Math.random() * 11);
-            assign_symbol_and_colors_to_HTML_cell(value, new_cell_html);
+            value = Math.floor(Math.random() * 12);
+            assign_symbol_and_colors_to_HTML_cell(value, new_cell_html, x, y);
             cell_grid_div.appendChild(new_cell_html);
             grid[x + y * grid_width] = {value: value, element: new_cell_html};
         }
@@ -38,11 +38,12 @@ const cell_text_templates = ['<span class="zero">&nbsp</span>',
                              '<span class="seven">7</span>',
                              '<span class="eight">8</span>',
                              '<span class="blank">&#x2588</span>',
+                             '<span class="blank">&#x2588</span>',
                              '<span class="flag">!</span>']
 
                              // flag symbol: &#x2691, unfortunately not monospaced
 
-function assign_symbol_and_colors_to_HTML_cell(value, cell) {
+function assign_symbol_and_colors_to_HTML_cell(value, cell, x, y) {
     // https://www.w3docs.com/snippets/javascript/how-to-create-a-new-dom-element-from-html-string.html
     template = document.createElement('template');
     template.innerHTML = cell_text_templates[value];
@@ -52,6 +53,10 @@ function assign_symbol_and_colors_to_HTML_cell(value, cell) {
     cell.innerHTML = template_clone.innerHTML;
     // https://stackoverflow.com/questions/2221160/how-to-change-a-css-class-style-through-javascript
     cell.className = template_clone.className;
+    // https://www.w3schools.com/jsref/event_onclick.asp
+    cell.onclick = function() {
+        cell_is_clicked(x, y);
+    }
 }
 
 function display_coordinates_of_click(x, y) {
@@ -61,4 +66,8 @@ function display_coordinates_of_click(x, y) {
     console.log("A letter was clicked: " + x + ", " + y);
     display_incrementer = document.getElementById("incrementer_display");
     display_incrementer.innerHTML = incrementer;
+}
+
+function cell_is_clicked(x, y) {
+    console.log("Clicked cell: "+x+", "+y);
 }

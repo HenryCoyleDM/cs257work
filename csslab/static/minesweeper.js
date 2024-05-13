@@ -81,7 +81,9 @@ function cell_is_clicked(x, y, event) {
             set_cell_value_and_update_colors(x, y, BOMB);
         } else if (cell_value == INCORRECT_FLAG) {
             set_cell_value_and_update_colors(x, y, UNEXPLORED);
-        } else {
+        } else if (cell_value == UNEXPLORED ) {
+            set_cell_value_and_update_colors(x, y, INCORRECT_FLAG);
+        } else if (cell_value == BOMB) {
             set_cell_value_and_update_colors(x, y, FLAG);
         }
     } else {

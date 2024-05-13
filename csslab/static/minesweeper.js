@@ -174,6 +174,7 @@ function lose() {
 }
 
 function uncover_all_neighboring_cells(x, y) {
+    console.log("Mass excavating at ("+x+", "+y+")");
     for (i = x-1; i <= x+1; i++) {
         for (j = y-1; j <= y+1; j++) {
             if (is_in_bounds(i, j) && (i != x || j != y)) {

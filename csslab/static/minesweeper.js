@@ -19,7 +19,7 @@ function instantiate_field() {
             // console.log("Created new HTML element: " + new_cell_html);
             value = Math.floor(Math.random() * 12);
             assign_symbol_and_colors_to_HTML_cell(value, new_cell_html);
-            assign_click_function_to_HTML_cell(cell, x, y);
+            assign_click_function_to_HTML_cell(new_cell_html, x, y);
             cell_grid_div.appendChild(new_cell_html);
             grid[x + y * grid_width] = {value: value, element: new_cell_html};
         }

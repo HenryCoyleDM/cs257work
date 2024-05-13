@@ -97,7 +97,7 @@ function get_number_of_neighboring_bombs(x, y) {
     total = 0;
     for (i = x-1; i <= x+1; i++) {
         for (j = y-1; j <= y+1; j++) {
-            if (is_in_bounds(x, y) && (i != x || j != y)) {
+            if (is_in_bounds(i, j) && (i != x || j != y)) {
                 test_value = get_cell_value(i, j);
                 if (test_value == BOMB || test_value == FLAG) {
                     total++;
